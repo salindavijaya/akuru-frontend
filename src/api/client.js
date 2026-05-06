@@ -1,6 +1,9 @@
 import axios from 'axios'
 import { getToken, clearAuth } from '../utils/token'
 
+// In production (Vercel), Vercel rewrites /api/* to the Cloud Run backend.
+// In development, Vite proxy handles /api/* → localhost:3000.
+// So baseURL is always /api/v1 — no env var needed in the client itself.
 const client = axios.create({
   baseURL: '/api/v1',
   timeout: 30000,
@@ -22,7 +25,6 @@ client.interceptors.response.use(
       clearAuth()
       window.location.href = '/login'
     }
-    // Normalise error message for consumers
     const message =
       err.response?.data?.error?.message ||
       err.response?.data?.message ||
