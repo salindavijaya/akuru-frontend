@@ -10,7 +10,7 @@ export default defineConfig(({ mode }) => {
       port: 5173,
       proxy: {
         '/api': {
-          target: env.VITE_API_URL || 'http://localhost:3000',
+          target: 'https://sicript-service-164416241987.asia-south1.run.app' || env.VITE_API_URL || 'http://localhost:3000',
           changeOrigin: true,
         },
       },
